@@ -8,139 +8,136 @@
 [sub_resource type="GDScript" id=26]
 script/source = "extends KinematicBody2D
 
+export var playerSpeed : float = 200
+export var gravity : float =  35
+export var jumpForce : float = 500
+
+var velocity = Vector2.ZERO
+var normal_vector = Vector2.UP
+
 onready var sprite = $AnimatedSprite
 
 func _ready() -> void:
 	sprite.play(\"Idle\")
 
-
+func _physics_process(delta: float) -> void:
+	velocity.y += gravity # TODO make gravity a vector, create a dict that maps enum of grav direction to vector of gravity
+	velocity = move_and_slide(velocity, normal_vector)
+	
 func _process(delta: float) -> void:
-	_handle_anim()
+	_handle_anim_and_velocity()
 
 
-func _handle_anim() -> void:
-	if Input.is_action_just_pressed(\"Left\"):
+func _handle_anim_and_velocity() -> void:
+	if Input.is_action_pressed(\"Left\"):
 		sprite.play(\"Run\")
 		sprite.flip_h = true
-	if Input.is_action_just_pressed(\"Right\"):
+		velocity.x = -playerSpeed
+	elif Input.is_action_pressed(\"Right\"):
 		sprite.play(\"Run\")
 		sprite.flip_h = false
-	if Input.is_action_just_pressed(\"Up\"):
+		velocity.x = playerSpeed
+	else:
+		sprite.play(\"Idle\")
+		velocity.x = 0
+		
+		
+	if Input.is_action_just_pressed(\"Up\") && is_on_floor():
 		sprite.play(\"Jump\")
+		velocity.y = -jumpForce
+
+
 "
 
 [sub_resource type="AtlasTexture" id=13]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=14]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=15]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=16]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=17]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 128, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=18]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 160, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=19]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 192, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=20]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 224, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=21]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 256, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=22]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 288, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=23]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 320, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=24]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 352, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=1]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=2]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=3]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 128, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 160, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=7]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 192, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 224, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 256, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=10]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 288, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=11]
-flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 320, 0, 32, 32 )
 
@@ -169,9 +166,10 @@ animations = [ {
 
 [sub_resource type="CapsuleShape2D" id=25]
 radius = 9.0
-height = 6.0
+height = 4.0
 
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( 69, 25 )
 script = SubResource( 26 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -180,5 +178,5 @@ animation = "Idle"
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 3 )
+position = Vector2( 0, 4 )
 shape = SubResource( 25 )
