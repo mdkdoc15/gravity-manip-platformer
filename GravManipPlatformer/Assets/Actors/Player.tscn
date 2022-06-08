@@ -8,43 +8,174 @@
 [sub_resource type="GDScript" id=26]
 script/source = "extends KinematicBody2D
 
+
+# Used to keep track of the direction of gravityorgo
+enum GRAV {
+	DOWN,
+	UP,
+	LEFT,
+	RIGHT
+}
+
 export var playerSpeed : float = 200
-export var gravity : float =  35
+export var gravityForce : float =  35
 export var jumpForce : float = 500
 
+var gravityDir = GRAV.DOWN 
+var gravity : Vector2 = Vector2.UP
 var velocity = Vector2.ZERO
-var normal_vector = Vector2.UP
+var normal_vector = Vector2.DOWN
+var jumpVec : Vector2 = Vector2.ZERO
+
+var gravDir_to_gravity = {
+	GRAV.DOWN : Vector2.DOWN,
+	GRAV.UP : Vector2.UP,
+	GRAV.LEFT : Vector2.LEFT,
+	GRAV.RIGHT : Vector2.RIGHT
+} 
+
+
+
 
 onready var sprite = $AnimatedSprite
 
 func _ready() -> void:
 	sprite.play(\"Idle\")
 
+
 func _physics_process(delta: float) -> void:
-	velocity.y += gravity # TODO make gravity a vector, create a dict that maps enum of grav direction to vector of gravity
-	velocity = move_and_slide(velocity, normal_vector)
+	_set_grav_vars()
+	_move()
 	
 func _process(delta: float) -> void:
-	_handle_anim_and_velocity()
+	_handle_anim()
+	_handle_velocity()
+	_handle_gravity_input()
 
 
-func _handle_anim_and_velocity() -> void:
-	if Input.is_action_pressed(\"Left\"):
-		sprite.play(\"Run\")
-		sprite.flip_h = true
-		velocity.x = -playerSpeed
-	elif Input.is_action_pressed(\"Right\"):
-		sprite.play(\"Run\")
-		sprite.flip_h = false
-		velocity.x = playerSpeed
+func _handle_gravity_input() -> void:
+	# Set the state of gravity based on user input
+	if Input.is_action_pressed(\"Grav_left\"):
+		gravityDir = GRAV.LEFT
+	elif Input.is_action_pressed(\"Grav_right\"):
+		gravityDir = GRAV.RIGHT
+	elif Input.is_action_pressed(\"Grav_up\"):
+		gravityDir = GRAV.UP
+	elif Input.is_action_pressed(\"Grav_down\"):
+		gravityDir = GRAV.DOWN
+
+		
+
+
+func _handle_velocity() -> void:
+	if(gravityDir == GRAV.DOWN || gravityDir == GRAV.UP):
+		_handle_Up_Down_Velocity()
 	else:
-		sprite.play(\"Idle\")
-		velocity.x = 0
+		_handle_Left_Right_Velocity()
 		
+	if Input.is_action_just_pressed(\"Jump\") && is_on_floor():
+		_jump()
 		
+func _handle_anim() -> void:
+	# Handle the state of the animation
+	if(gravityDir == GRAV.DOWN || gravityDir == GRAV.UP):
+		_handle_Up_Down_Anim()
+	else:
+		_handle_Left_Right_Anim()
+		
+	
 	if Input.is_action_just_pressed(\"Up\") && is_on_floor():
 		sprite.play(\"Jump\")
-		velocity.y = -jumpForce
+		
+	if !is_on_floor() && _is_falling():
+		sprite.play(\"Fall\")
+	
+	# Rotate the sprite to match gravity orientation 
+	# TODO add tween
+	match gravityDir:
+		GRAV.DOWN:
+			sprite.rotation = 0
+		GRAV.UP:
+			sprite.rotation = PI
+		GRAV.RIGHT:
+			sprite.rotation = -PI/2
+		GRAV.LEFT:
+			sprite.rotation = PI/2
+
+		
+func _set_grav_vars() -> void:
+	# Use the gravity value to set the normal, direction of gravity, jump force, etc.
+	gravity = gravDir_to_gravity[gravityDir]
+	normal_vector = gravity * -1 # Normal is opposite of gravity direction
+	
+func _move() -> void:
+	# Move the character
+	velocity += gravity * gravityForce # TODO make gravity a vector, create a dict that maps enum of grav direction to vector of gravity
+	velocity = move_and_slide(velocity, normal_vector)
+
+func _is_falling() -> bool:
+	# Check if the character is falling relative to the  gravity direction
+	return false 
+	
+func _jump() -> void:
+	match gravityDir:
+		GRAV.DOWN:
+			velocity.y = -jumpForce
+		GRAV.UP:
+			velocity.y = jumpForce
+		GRAV.RIGHT:
+			velocity.x = -jumpForce
+		GRAV.LEFT:
+			velocity.x = jumpForce
+			
+func _handle_Up_Down_Velocity() -> void:
+	
+	# Handle Input that impacts velocity
+	if Input.is_action_pressed(\"Left\"):
+
+		velocity.x = -playerSpeed # TODO will need to make player speed a vector
+	elif Input.is_action_pressed(\"Right\"):
+
+		velocity.x = playerSpeed
+	else:
+		
+		velocity.x = 0
+		
+func _handle_Left_Right_Velocity() -> void:
+	
+	# Handle Input that impacts velocity
+	if Input.is_action_pressed(\"Up\"):
+
+		velocity.y = -playerSpeed # TODO will need to make player speed a vector
+	elif Input.is_action_pressed(\"Down\"):
+
+		velocity.y = playerSpeed
+	else:
+		
+		velocity.y = 0
+		
+
+func _handle_Left_Right_Anim() -> void:
+	if Input.is_action_pressed(\"Up\"):
+		sprite.play(\"Run\")
+		sprite.flip_h = (gravityDir == GRAV.LEFT)
+	elif Input.is_action_pressed(\"Down\"):
+		sprite.play(\"Run\")
+		sprite.flip_h = !(gravityDir == GRAV.LEFT)
+	else:
+		sprite.play(\"Idle\")
+		
+func _handle_Up_Down_Anim() -> void:
+	if Input.is_action_pressed(\"Left\"):
+		sprite.play(\"Run\")
+		sprite.flip_h = (gravityDir == GRAV.DOWN)
+	elif Input.is_action_pressed(\"Right\"):
+		sprite.play(\"Run\")
+		sprite.flip_h = !(gravityDir == GRAV.DOWN)
+	else:
+		sprite.play(\"Idle\")
+		
+
 
 
 "
