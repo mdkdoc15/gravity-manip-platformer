@@ -9,6 +9,7 @@
 script/source = "extends KinematicBody2D
 
 
+
 # Used to keep track of the direction of gravityorgo
 enum GRAV {
 	DOWN,
@@ -84,11 +85,11 @@ func _handle_anim() -> void:
 		_handle_Left_Right_Anim()
 		
 	
-	if Input.is_action_just_pressed(\"Up\") && is_on_floor():
-		sprite.play(\"Jump\")
-		
-	if !is_on_floor() && _is_falling():
-		sprite.play(\"Fall\")
+	if !is_on_floor():
+		if _is_falling():
+			sprite.play(\"Fall\")
+		else:
+			sprite.play(\"Jump\")
 	
 	# Rotate the sprite to match gravity orientation 
 	# TODO add tween
@@ -115,7 +116,9 @@ func _move() -> void:
 
 func _is_falling() -> bool:
 	# Check if the character is falling relative to the  gravity direction
-	return false 
+	var temp : Vector2 = gravity * velocity
+	
+	return temp.x < 0 || temp.y > 0
 	
 func _jump() -> void:
 	match gravityDir:
@@ -178,6 +181,10 @@ func _handle_Up_Down_Anim() -> void:
 
 
 
+
+
+func _on_Spikes_Player_Died() -> void:
+	queue_free()
 "
 
 [sub_resource type="AtlasTexture" id=13]
@@ -305,8 +312,7 @@ script = SubResource( 26 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 12 )
-animation = "Idle"
-frame = 1
+animation = "Jump"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
