@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Tools/Change_Scene_BTN.gd" type="Script" id=1]
+
+[node name="StartButton" type="Button"]
+margin_right = 112.0
+margin_bottom = 26.0
+text = "START"
+script = ExtResource( 1 )
+
+[connection signal="pressed" from="." to="." method="_on_StartButton_pressed"]
