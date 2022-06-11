@@ -6,7 +6,8 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
 
-
+func _ready() -> void:
+	get_tree().paused = false
 
 func _on_StartButton_pressed() -> void:
 	get_tree().change_scene(\"res://Assets/Scenes/TestScene.tscn\")

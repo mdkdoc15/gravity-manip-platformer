@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/arabian-cat-22154.mp3-90e841af6fc54a3e1a90c2d1f9a3136e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/arabian-cat-22154.mp3"
+dest_files=[ "res://.import/arabian-cat-22154.mp3-90e841af6fc54a3e1a90c2d1f9a3136e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

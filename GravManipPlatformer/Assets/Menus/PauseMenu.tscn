@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Tools/Button_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/Menus/PauseMenu.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Tools/Default_theme.tres" type="Theme" id=3]
+
+[node name="PauseMenu" type="CanvasLayer"]
+layer = 100
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+
+[node name="Background" type="ColorRect" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.188235, 0.176471, 0.176471, 0.356863 )
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CenterContainer"]
+margin_left = 224.0
+margin_top = 91.0
+margin_right = 416.0
+margin_bottom = 269.0
+custom_constants/separation = 40
+
+[node name="Text" type="Label" parent="Panel/CenterContainer/VBoxContainer"]
+margin_right = 192.0
+margin_bottom = 30.0
+text = "PAUSED"
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel/CenterContainer/VBoxContainer"]
+margin_top = 70.0
+margin_right = 192.0
+margin_bottom = 178.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CenterContainer/VBoxContainer/CenterContainer"]
+margin_right = 192.0
+margin_bottom = 108.0
+theme = ExtResource( 1 )
+custom_constants/separation = 15
+
+[node name="ResumeButton" type="Button" parent="Panel/CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 192.0
+margin_bottom = 26.0
+text = "RESUME"
+
+[node name="MainMenuButton" type="Button" parent="Panel/CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 41.0
+margin_right = 192.0
+margin_bottom = 67.0
+text = "MAIN MENU"
+
+[node name="QuitButton" type="Button" parent="Panel/CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 82.0
+margin_right = 192.0
+margin_bottom = 108.0
+text = "QUIT"
+
+[connection signal="pressed" from="Panel/CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="Panel/CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
+[connection signal="pressed" from="Panel/CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

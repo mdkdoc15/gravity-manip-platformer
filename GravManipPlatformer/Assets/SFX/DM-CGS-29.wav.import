@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DM-CGS-29.wav-03d0bb35d6858d16fb7854f1a45fea67.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/DM-CGS-29.wav"
+dest_files=[ "res://.import/DM-CGS-29.wav-03d0bb35d6858d16fb7854f1a45fea67.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DM-CGS-44.wav-cd2453861a197f2e774bd68d2e8c4145.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/DM-CGS-44.wav"
+dest_files=[ "res://.import/DM-CGS-44.wav-cd2453861a197f2e774bd68d2e8c4145.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
