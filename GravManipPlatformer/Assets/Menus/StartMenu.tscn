@@ -51,7 +51,7 @@ theme = ExtResource( 2 )
 custom_constants/separation = 15
 
 [node name="StartButton" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer" instance=ExtResource( 3 )]
-path = "res://Assets/Levels/Level1.tscn"
+path = "res://Assets/Levels/Level0.tscn"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 41.0

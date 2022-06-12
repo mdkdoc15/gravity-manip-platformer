@@ -371,9 +371,8 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=25]
-radius = 9.0
-height = 4.0
+[sub_resource type="RectangleShape2D" id=34]
+extents = Vector2( 6.5, 11.5 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 15
@@ -385,8 +384,8 @@ frames = SubResource( 12 )
 animation = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 6 )
-shape = SubResource( 25 )
+position = Vector2( 0.5, 6.5 )
+shape = SubResource( 34 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.55
