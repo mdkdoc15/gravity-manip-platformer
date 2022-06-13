@@ -47,6 +47,7 @@ var gravDir_to_gravity = {
 
 
 func _ready() -> void:
+	SignalManager.connect(\"PlayerDeath\", self, \"death\")
 	sprite.play(\"Idle\")
 
 
@@ -208,8 +209,7 @@ func death() -> void:
 
 
 
-func _on_Spikes_Player_Died() -> void:
-	death()
+
 
 
 func _on_Timer_timeout() -> void:

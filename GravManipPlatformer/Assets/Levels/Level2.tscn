@@ -30,4 +30,4 @@ position = Vector2( 55, 311 )
 
 [node name="Goal" parent="." instance=ExtResource( 4 )]
 position = Vector2( 46, 64 )
-path = "res://Assets/Menus/StartMenu.tscn"
+path = "res://Assets/Levels/Level3.tscn"

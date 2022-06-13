@@ -1,0 +1,257 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Tools/new_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Assets/Menus/PauseMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Actors/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Traps/Goal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Traps/Spikes.tscn" type="PackedScene" id=5]
+
+[node name="Level3" type="Node2D"]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 2 )]
+
+[node name="Background" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 8
+format = 1
+tile_data = PoolIntArray( 0, 21, 0, 3, 21, 0, 6, 21, 0, 9, 21, 0, 12, 21, 0, 15, 21, 0, 18, 21, 0, 131073, -1610612715, 0, 196608, 21, 0, 196611, -1610612715, 0, 196614, 21, 0, 196617, -1610612715, 0, 196620, 21, 0, 196623, -1610612715, 0, 196626, 21, 0, 393216, 21, 0, 393219, 21, 0, 393222, 21, 0, 393225, 21, 0, 393228, 21, 0, 393231, 21, 0, 393234, 21, 0, 589824, 21, 0, 589827, 21, 0, 589830, 21, 0, 589833, 21, 0, 589836, 21, 0, 589839, 21, 0, 589842, 21, 0 )
+
+[node name="Objects" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 8
+collision_layer = 2
+collision_mask = 2
+format = 1
+tile_data = PoolIntArray( -1, -1073741802, 0, -65536, -1073741802, 0, -65535, -1073741802, 0, -65534, -1073741802, 0, -65533, -1073741802, 0, -65532, -1073741802, 0, -65531, -1073741802, 0, -65530, -1073741802, 0, -65529, -1073741802, 0, -65528, -1073741802, 0, -65527, -1073741802, 0, -65526, -1073741802, 0, -65525, -1073741802, 0, -65524, -1073741802, 0, -65523, -1073741802, 0, -65522, -1073741802, 0, -65521, -1073741802, 0, -65520, -1073741802, 0, -65519, -1073741802, 0, -65518, -1073741802, 0, -65517, -1073741802, 0, -65516, -1073741802, 0, 65535, -1073741802, 0, 0, -1073741802, 0, 1, -1073741802, 0, 2, -1073741802, 0, 3, -1073741802, 0, 4, -1073741802, 0, 5, -1073741802, 0, 6, -1073741802, 0, 7, -1073741802, 0, 8, -1073741802, 0, 9, -1073741802, 0, 10, -1073741802, 0, 11, -1073741802, 0, 12, -1073741802, 0, 13, -1073741802, 0, 14, -1073741802, 0, 15, -1073741802, 0, 16, -1073741802, 0, 17, -1073741802, 0, 18, -1073741802, 0, 19, -1073741802, 0, 20, -1073741802, 0, 131071, -1073741802, 0, 65536, 22, 0, 65542, 22, 0, 65543, 22, 0, 65544, 22, 0, 65545, 22, 0, 65555, 22, 0, 65556, -1073741802, 0, 196607, -1073741802, 0, 131072, 22, 0, 131078, 22, 0, 131079, 22, 0, 131080, 22, 0, 131081, 22, 0, 131087, 22, 0, 131091, 22, 0, 131092, -1073741802, 0, 262143, -1073741802, 0, 196608, -1073741802, 0, 196611, 22, 0, 196614, 22, 0, 196620, 22, 0, 196623, 22, 0, 196624, 22, 0, 196625, 22, 0, 196626, 22, 0, 196627, 22, 0, 196628, -1073741802, 0, 327679, -1073741802, 0, 262144, 22, 0, 262147, 22, 0, 262150, 22, 0, 262156, 22, 0, 262163, 22, 0, 262164, -1073741802, 0, 393215, -1073741802, 0, 327680, 22, 0, 327683, 22, 0, 327686, 22, 0, 327689, 22, 0, 327690, 22, 0, 327691, 22, 0, 327692, 22, 0, 327699, 22, 0, 327700, -1073741802, 0, 458751, -1073741802, 0, 393216, 22, 0, 393219, 22, 0, 393222, 22, 0, 393228, 22, 0, 393229, 22, 0, 393230, 22, 0, 393231, 22, 0, 393232, 22, 0, 393235, 22, 0, 393236, -1073741802, 0, 524287, -1073741802, 0, 458752, 22, 0, 458755, 22, 0, 458758, 22, 0, 458764, 22, 0, 458765, 22, 0, 458766, 22, 0, 458767, 22, 0, 458768, 22, 0, 458771, 22, 0, 458772, -1073741802, 0, 589823, -1073741802, 0, 524288, -1073741802, 0, 524291, 22, 0, 524294, 22, 0, 524295, 22, 0, 524296, 22, 0, 524297, 22, 0, 524300, 22, 0, 524301, 22, 0, 524302, 22, 0, 524303, 22, 0, 524304, 22, 0, 524307, 22, 0, 524308, -1073741802, 0, 655359, -1073741802, 0, 589824, 22, 0, 589827, 22, 0, 589843, 22, 0, 589844, -1073741802, 0, 720895, -1073741802, 0, 655360, 22, 0, 655363, 22, 0, 655379, 22, 0, 655380, -1073741802, 0, 786431, -1073741802, 0, 720896, 22, 0, 720897, 22, 0, 720898, 22, 0, 720899, 22, 0, 720900, 22, 0, 720901, 22, 0, 720902, 22, 0, 720903, 22, 0, 720904, 22, 0, 720905, 22, 0, 720906, 22, 0, 720907, 22, 0, 720908, 22, 0, 720909, 22, 0, 720910, -1073741802, 0, 720911, -1073741802, 0, 720912, -1073741802, 0, 720913, -1073741802, 0, 720914, -1073741802, 0, 720915, -1073741802, 0, 720916, -1073741802, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 55, 311 )
+
+[node name="Goal" parent="." instance=ExtResource( 4 )]
+position = Vector2( 572, 64 )
+path = "res://Assets/Levels/Level3.tscn"
+
+[node name="SpikeCollection" type="Node" parent="."]
+
+[node name="Spikes" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 46, 36 )
+rotation = -3.14159
+
+[node name="Spikes2" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 78, 36 )
+rotation = -3.14159
+
+[node name="Spikes3" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 109, 36 )
+rotation = -3.14159
+
+[node name="Spikes4" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 142, 37 )
+rotation = -3.14159
+
+[node name="Spikes11" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 494, 132 )
+rotation = -3.14159
+
+[node name="Spikes16" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 526, 132 )
+rotation = -3.14159
+
+[node name="Spikes17" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 557, 132 )
+rotation = -3.14159
+
+[node name="Spikes18" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 590, 133 )
+rotation = -3.14159
+
+[node name="Spikes19" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 434, 187 )
+
+[node name="Spikes20" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 466, 187 )
+
+[node name="Spikes21" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 497, 187 )
+
+[node name="Spikes22" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 530, 188 )
+
+[node name="Spikes24" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 305, 154 )
+
+[node name="Spikes25" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 336, 154 )
+
+[node name="Spikes26" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 369, 155 )
+
+[node name="Spikes28" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 304, 195 )
+rotation = 3.14159
+
+[node name="Spikes29" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 335, 195 )
+rotation = 3.14159
+
+[node name="Spikes30" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 368, 196 )
+rotation = 3.14159
+
+[node name="Spikes5" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 173, 37 )
+rotation = -3.14159
+
+[node name="Spikes23" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 132, 176 )
+rotation = 1.5708
+
+[node name="Spikes27" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 131, 143 )
+rotation = 1.5708
+
+[node name="Spikes31" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 131, 112 )
+rotation = 1.5708
+
+[node name="Spikes32" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 133, 208 )
+rotation = 1.5708
+
+[node name="Spikes33" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 133, 243 )
+rotation = 1.5708
+
+[node name="Spikes34" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 36, 190 )
+rotation = 1.5708
+
+[node name="Spikes35" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 35, 157 )
+rotation = 1.5708
+
+[node name="Spikes36" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 35, 126 )
+rotation = 1.5708
+
+[node name="Spikes37" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 37, 222 )
+rotation = 1.5708
+
+[node name="Spikes38" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 37, 257 )
+rotation = 1.5708
+
+[node name="Spikes39" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 229, 178 )
+rotation = 1.5708
+
+[node name="Spikes40" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 228, 145 )
+rotation = 1.5708
+
+[node name="Spikes41" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 228, 114 )
+rotation = 1.5708
+
+[node name="Spikes42" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 230, 210 )
+rotation = 1.5708
+
+[node name="Spikes43" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 228, 242 )
+rotation = 1.5708
+
+[node name="Spikes49" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 187, 177 )
+rotation = -1.5708
+
+[node name="Spikes50" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 186, 144 )
+rotation = -1.5708
+
+[node name="Spikes51" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 186, 113 )
+rotation = -1.5708
+
+[node name="Spikes52" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 188, 209 )
+rotation = -1.5708
+
+[node name="Spikes53" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 186, 241 )
+rotation = -1.5708
+
+[node name="Spikes54" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 603, 272 )
+rotation = -1.5708
+
+[node name="Spikes55" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 602, 239 )
+rotation = -1.5708
+
+[node name="Spikes57" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 604, 304 )
+rotation = -1.5708
+
+[node name="Spikes58" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 602, 336 )
+rotation = -1.5708
+
+[node name="Spikes45" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 420, 109 )
+rotation = 1.5708
+
+[node name="Spikes46" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 418, 141 )
+rotation = 1.5708
+
+[node name="Spikes47" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 323, 51 )
+rotation = 1.5708
+
+[node name="Spikes48" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 321, 83 )
+rotation = 1.5708
+
+[node name="Spikes44" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 475, 77 )
+rotation = -1.5708
+
+[node name="Spikes6" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 398, 292 )
+rotation = -3.14159
+
+[node name="Spikes7" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 430, 292 )
+rotation = -3.14159
+
+[node name="Spikes8" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 461, 292 )
+rotation = -3.14159
+
+[node name="Spikes9" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 494, 293 )
+rotation = -3.14159
+
+[node name="Spikes10" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 525, 293 )
+rotation = -3.14159
+
+[node name="Spikes12" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 209, 292 )
+rotation = -3.14159
+
+[node name="Spikes13" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 240, 292 )
+rotation = -3.14159
+
+[node name="Spikes14" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 273, 293 )
+rotation = -3.14159
+
+[node name="Spikes15" parent="SpikeCollection" instance=ExtResource( 5 )]
+position = Vector2( 304, 293 )
+rotation = -3.14159

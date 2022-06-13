@@ -9,13 +9,14 @@ signal Player_Died
 
 func _on_Spikes_body_entered(body: Node) -> void:
 	# Player is the only thing that can collide with the spikes so if there is collide then player dies
-	emit_signal(\"Player_Died\")
+	SignalManager.emit_signal(\"PlayerDeath\")
 "
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.5, 2.5 )
 
 [node name="Spikes" type="Area2D"]
+scale = Vector2( 2, 2 )
 collision_layer = 0
 script = SubResource( 2 )
 
