@@ -377,6 +377,7 @@ extents = Vector2( 6.5, 11.5 )
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 15
 script = SubResource( 26 )
+gravityForce = 20.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 1, 1.1875 )

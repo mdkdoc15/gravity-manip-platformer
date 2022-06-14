@@ -1,30 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Assets/Tools/Default_theme.tres" type="Theme" id=1]
-[ext_resource path="res://Assets/Tools/Button_theme.tres" type="Theme" id=2]
-[ext_resource path="res://Assets/Tools/Change_Scene_BTN.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Tools/new_tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://Assets/Tools/Change_Scene_BTN.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Tools/Default_theme.tres" type="Theme" id=2]
+[ext_resource path="res://Assets/Tools/Button_theme.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/Tools/Change_Scene_BTN.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Traps/10_pt_ft.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Assets/Tools/new_tileset.tres" type="TileSet" id=6]
+[ext_resource path="res://Assets/Menus/EndScreen.gd" type="Script" id=7]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends Control
-
-func _ready() -> void:
-	get_tree().paused = false
-
-
-func _on_QuitButton_pressed() -> void:
-	# Quit the game
-	get_tree().quit()
-"
-
-[node name="StartMenu" type="Control"]
+[node name="EndScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
-script = SubResource( 1 )
+script = ExtResource( 7 )
 
 [node name="Background" type="TileMap" parent="."]
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 6 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 8
 format = 1
@@ -33,33 +23,47 @@ tile_data = PoolIntArray( 0, 21, 0, 3, 21, 0, 6, 21, 0, 9, 21, 0, 12, 21, 0, 15,
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 140.0
-margin_top = 111.0
+margin_top = 96.0
 margin_right = 500.0
-margin_bottom = 248.0
-custom_constants/separation = 40
+margin_bottom = 263.0
+custom_constants/separation = 30
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 360.0
+margin_bottom = 10.0
+custom_fonts/font = ExtResource( 5 )
+text = "Thanks for playing "
+align = 1
+valign = 1
 
 [node name="GameName" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 40.0
 margin_right = 360.0
-margin_bottom = 30.0
+margin_bottom = 70.0
 text = "GRAVITY MAN!"
 
 [node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 70.0
+margin_top = 100.0
 margin_right = 360.0
-margin_bottom = 137.0
+margin_bottom = 167.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer"]
 margin_left = 124.0
 margin_right = 236.0
 margin_bottom = 67.0
-theme = ExtResource( 2 )
+theme = ExtResource( 3 )
 custom_constants/separation = 15
 
-[node name="StartButton" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer" instance=ExtResource( 3 )]
-path = "res://Assets/Levels/Level0.tscn"
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_right = 112.0
+margin_bottom = 26.0
+text = "RETRY"
+script = ExtResource( 4 )
+path = "res://Assets/Menus/StartMenu.tscn"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 41.0
@@ -67,4 +71,5 @@ margin_right = 112.0
 margin_bottom = 67.0
 text = "QUIT"
 
+[connection signal="pressed" from="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/StartButton" to="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/StartButton" method="_on_StartButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
